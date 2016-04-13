@@ -61,6 +61,7 @@ class ListaDePostagem
             $this->writeFooter();
 
             $pdf->Output($filename);
+            
             Bootstrap::getConfig()->getCacheInstance()->setItem($cacheKey, $pdf->buffer);
         }
     }

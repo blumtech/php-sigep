@@ -52,7 +52,7 @@ class CartaoDePostagem
         $this->init();
     }
 
-    public function render($filename="")
+    public function render($filename = "")
     {
         $cacheKey = md5(serialize($this->plp) . $this->idPlpCorreios . get_class($this));
         if ($pdfContent = Bootstrap::getConfig()->getCacheInstance()->getItem($cacheKey)) {
@@ -67,7 +67,7 @@ class CartaoDePostagem
         }
     }
 
-    private function _render($filename="")
+    private function _render($filename = "")
     {
         $un = 72 / 25.4;
         $wFourAreas = $this->pdf->w;
@@ -286,14 +286,22 @@ class CartaoDePostagem
                     $wEtiquetaBarCode,
                     $hEtiquetaBarCode
                 );
+                // Nome legivel, doc e rubrica
+                // 
+                $this->pdf->SetFontSize(7);
+                $this->pdf->SetXY(1, $this->pdf->GetY() + 23);
+                $this->t(0, 'Nome Legível:___________________________________________',1, 'L',  null);
+                $this->pdf->SetXY(1, $this->pdf->GetY() + 1);
+                $this->t(0, 'Documento:_______________________Rubrica:_____________________',1, 'L',  null);
 
                 // Destinatário
                 $wAddressLeftCol = $this->pdf->w - 5;
 
-                $tPosAfterBarCode = $this->pdf->GetY() + 25;
+                $tPosAfterNameBlock = 71 ;
+
                 $t = $this->writeDestinatario(
                     $lPosFourAreas,
-                    $tPosAfterBarCode,
+                    $tPosAfterNameBlock,
                     $wAddressLeftCol,
                     $objetoPostal
                 );
