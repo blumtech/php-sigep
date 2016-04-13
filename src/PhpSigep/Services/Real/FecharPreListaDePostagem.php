@@ -81,7 +81,7 @@ class FecharPreListaDePostagem
         $writer->openMemory();
         $writer->setIndentString("");
         $writer->setIndent(false);
-        $writer->startDocument('1.0', 'UTF-8');
+        $writer->startDocument('1.0', 'ISO-8859-1');
 
         $writer->startElement('correioslog');
         $writer->writeElement('tipo_arquivo', 'Postagem');
